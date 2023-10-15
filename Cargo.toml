@@ -1,0 +1,31 @@
+[workspace]
+resolver = "2"
+members  = ["crates/*"]
+
+[workspace.package]
+authors      = ["cijiugechu <cijiugechu@gmail.com>"]
+categories   = ["api-bindings", "network-programming", "web-programming"]
+description  = "dmzj api bindings"
+edition      = "2021"
+keywords     = ["dmzj", "api", "protobuf"]
+license      = "Apache-2.0"
+repository   = "https://github.com/cijiugechu/dmzj"
+homepage     = "https://github.com/cijiugechu/dmzj"
+
+[workspace.dependencies]
+dmzj-api-v3 = { path = "crates/dmzj-api-v3" }
+dmzj-api-v4 = { path = "crates/dmzj-api-v4" }
+dmzj-proto = { path = "crates/dmzj-proto" }
+
+reqwest = { version = "0.11.20", features = ["json", "cookies", "gzip", "brotli", "deflate"] }
+serde = { version = "1.0.188", features = ["derive"] }
+serde_json = { version = "1.0"}
+tokio = { version = "1", features = ["full"] }
+itoa = { version = "1.0.9"}
+prost = { version = "0.12.1" }
+prost-build = { version = "0.12.1"}
+bytes = { version = "1.5" }
+protobuf = { version = "3.3.0" }
+protobuf-codegen = { version = "3.3.0" }
+rsa = { version = "0.9.2"}
+base64 = { version = "0.21.4"}
