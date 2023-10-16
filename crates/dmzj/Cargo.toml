@@ -23,6 +23,7 @@ snafu = { workspace = true }
 http-cache-reqwest = { workspace = true }
 reqwest-middleware = { workspace = true }
 reqwest-retry      = { workspace = true }
+once_cell        = { workspace = true }
 
 dmzj-proto  = { workspace = true }
 

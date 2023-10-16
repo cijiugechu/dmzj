@@ -1,4 +1,5 @@
 use base64::{engine::general_purpose, Engine};
+use once_cell::sync::OnceCell;
 use rsa::{pkcs8::DecodePrivateKey, Pkcs1v15Encrypt, RsaPrivateKey};
 use snafu::ResultExt;
 
@@ -8,13 +9,18 @@ const PRIVATE_KEY_STR: &str = "MIICeAIBADANBgkqhkiG9w0BAQEFAASCAmIwggJeAgEAAoGBA
 
 const MAX_DECRYPT_BLOCK: usize = 128;
 
-fn get_private_key() -> RsaPrivateKey {
-    let key_bytes = general_purpose::STANDARD.decode(PRIVATE_KEY_STR).unwrap();
+fn get_private_key() -> &'static RsaPrivateKey {
+    static RSA_PRIVATE_KEY: OnceCell<RsaPrivateKey> = OnceCell::new();
 
-    RsaPrivateKey::from_pkcs8_der(&key_bytes).unwrap()
+    RSA_PRIVATE_KEY.get_or_init(|| {
+        let key_bytes =
+            general_purpose::STANDARD.decode(PRIVATE_KEY_STR).unwrap();
+
+        RsaPrivateKey::from_pkcs8_der(&key_bytes).unwrap()
+    })
 }
 
-fn decrypt(encrypted: String, key: RsaPrivateKey) -> DmzjResult<Vec<u8>> {
+fn decrypt(encrypted: String, key: &RsaPrivateKey) -> DmzjResult<Vec<u8>> {
     let mut result = vec![];
     let encrypted_data = general_purpose::STANDARD.decode(encrypted).unwrap();
 
@@ -28,5 +34,6 @@ fn decrypt(encrypted: String, key: RsaPrivateKey) -> DmzjResult<Vec<u8>> {
 
 pub fn decrypt_text(text: String) -> DmzjResult<Vec<u8>> {
     let key = get_private_key();
+
     decrypt(text, key)
 }
