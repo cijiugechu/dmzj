@@ -7,7 +7,7 @@ use reqwest_middleware::{ClientBuilder, ClientWithMiddleware};
 use snafu::ResultExt;
 use std::time::Duration;
 
-use crate::crypto::{decrypt, get_private_key};
+use crate::crypto::decrypt_text;
 use crate::error::{DmzjResult, ParseSnafu, RequestSnafu};
 use crate::model::{LatestUpdatesMangaItem, PopularMangaItem};
 
@@ -64,6 +64,15 @@ impl Api {
 
     pub fn chapter_images_url_v1(path: String) -> String {
         format!("https://m.idmzj.com/chapinfo/{}.html", path)
+    }
+
+    pub fn chapter_images_url(manga_id: u32, chapter_id: i32) -> String {
+        format!(
+            "{}/comic/chapter/{}/{}",
+            Self::V4_API_URL,
+            manga_id,
+            chapter_id
+        )
     }
 
     pub async fn fetch_popular_manga(
@@ -123,9 +132,7 @@ impl Api {
             .await
             .context(ParseSnafu { url: url.as_str() })?;
 
-        let cipher = get_private_key();
-
-        let b = decrypt(text, cipher)?;
+        let b = decrypt_text(text)?;
 
         Ok(ComicDetailResponse::parse_from_bytes(&b).unwrap())
     }

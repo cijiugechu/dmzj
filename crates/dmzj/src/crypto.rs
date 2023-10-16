@@ -8,13 +8,13 @@ const PRIVATE_KEY_STR: &str = "MIICeAIBADANBgkqhkiG9w0BAQEFAASCAmIwggJeAgEAAoGBA
 
 const MAX_DECRYPT_BLOCK: usize = 128;
 
-pub fn get_private_key() -> RsaPrivateKey {
+fn get_private_key() -> RsaPrivateKey {
     let key_bytes = general_purpose::STANDARD.decode(PRIVATE_KEY_STR).unwrap();
 
     RsaPrivateKey::from_pkcs8_der(&key_bytes).unwrap()
 }
 
-pub fn decrypt(encrypted: String, key: RsaPrivateKey) -> DmzjResult<Vec<u8>> {
+fn decrypt(encrypted: String, key: RsaPrivateKey) -> DmzjResult<Vec<u8>> {
     let mut result = vec![];
     let encrypted_data = general_purpose::STANDARD.decode(encrypted).unwrap();
 
@@ -24,4 +24,9 @@ pub fn decrypt(encrypted: String, key: RsaPrivateKey) -> DmzjResult<Vec<u8>> {
     }
 
     Ok(result)
+}
+
+pub fn decrypt_text(text: String) -> DmzjResult<Vec<u8>> {
+    let key = get_private_key();
+    decrypt(text, key)
 }
