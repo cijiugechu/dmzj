@@ -1,4 +1,4 @@
-use dmzj_api_v3::{MangaDetailsData, MangaDetailsInfo, MangaDetailsResponse};
+use dmzj::model::{MangaDetailsData, MangaDetailsInfo, MangaDetailsResponse};
 
 fn main() {
     let info = MangaDetailsInfo {
@@ -29,7 +29,8 @@ fn main() {
 
     println!("serialized = {:?}", serialized);
 
-    let deserialized: MangaDetailsResponse = serde_json::from_str(&serialized).unwrap();
+    let deserialized: MangaDetailsResponse =
+        serde_json::from_str(&serialized).unwrap();
 
     println!("deserialized = {:?}", deserialized);
 }

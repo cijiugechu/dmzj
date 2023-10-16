@@ -1,10 +1,14 @@
-use dmzj_api_v4::ApiV4;
+use dmzj::Api;
 
 #[tokio::main]
 async fn main() {
-    let api = ApiV4::new();
+    let api = Api::new();
 
-    let response = api.fetch_manga_details(48194).await.unwrap();
+    let popular_manga = api.fetch_latest_updates_manga(1).await.unwrap();
+    let first = &popular_manga[0];
+    let first_id = first.id;
+
+    let response = api.fetch_manga_details(first_id).await.unwrap();
 
     let description = &response.Data.Description;
     let title = &response.Data.Title;

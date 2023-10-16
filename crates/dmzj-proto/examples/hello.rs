@@ -29,9 +29,10 @@ fn decrypt(encrypted: String, key: RsaPrivateKey) -> Vec<u8> {
 
 #[tokio::main]
 async fn main() {
-    let res = reqwest::get("https://nnv4api.dmzj.com/comic/detail/16187?uid=2665531")
-        .await
-        .unwrap();
+    let res =
+        reqwest::get("https://nnv4api.dmzj.com/comic/detail/16187?uid=2665531")
+            .await
+            .unwrap();
 
     let text = res.text().await.unwrap();
 
