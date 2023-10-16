@@ -1,5 +1,9 @@
 use dmzj_proto::details::ComicDetailResponse;
+use http_cache_reqwest::{
+    Cache, CacheMode, HttpCache, HttpCacheOptions, MokaManager,
+};
 use protobuf::Message;
+use reqwest_middleware::{ClientBuilder, ClientWithMiddleware};
 use snafu::ResultExt;
 use std::time::Duration;
 
@@ -16,7 +20,7 @@ pub const USER_AGENT: &str = "PostmanRuntime/7.28.4";
 
 #[derive(Debug, Clone)]
 pub struct Api {
-    http_client: reqwest::Client,
+    http_client: ClientWithMiddleware,
 }
 
 impl Api {
@@ -25,11 +29,19 @@ impl Api {
     const API_URL: &'static str = "https://api.dmzj.com";
 
     pub fn new() -> Self {
-        let http_client = reqwest::ClientBuilder::new()
-            .timeout(Duration::from_secs(30))
-            .user_agent(USER_AGENT)
-            .build()
-            .expect("failed to build http client");
+        let http_client = ClientBuilder::new(
+            reqwest::ClientBuilder::new()
+                .timeout(Duration::from_secs(30))
+                .user_agent(USER_AGENT)
+                .build()
+                .expect("failed to build http client"),
+        )
+        .with(Cache(HttpCache {
+            mode: CacheMode::Default,
+            manager: MokaManager::default(),
+            options: HttpCacheOptions::default(),
+        }))
+        .build();
 
         Self { http_client }
     }

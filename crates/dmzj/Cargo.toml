@@ -20,6 +20,9 @@ base64 = { workspace = true }
 protobuf = { workspace = true }
 rsa = { workspace = true }
 snafu = { workspace = true }
+http-cache-reqwest = { workspace = true }
+reqwest-middleware = { workspace = true }
+reqwest-retry      = { workspace = true }
 
 dmzj-proto  = { workspace = true }
 
