@@ -7,7 +7,7 @@ fn main() {
         .customize(customize)
         .pure()
         .out_dir("src/protos")
-        .inputs(["protos/details.proto"])
+        .inputs(["protos/comic.proto"])
         .include("protos")
         .run()
         .expect("Codegen failed.");

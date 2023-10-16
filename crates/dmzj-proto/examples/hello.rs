@@ -1,5 +1,5 @@
 use base64::{engine::general_purpose, Engine as _};
-use dmzj_proto::details;
+use dmzj_proto::comic;
 use protobuf::Message;
 use rsa::{pkcs8::DecodePrivateKey, Pkcs1v15Encrypt, RsaPrivateKey};
 
@@ -30,7 +30,7 @@ fn decrypt(encrypted: String, key: RsaPrivateKey) -> Vec<u8> {
 #[tokio::main]
 async fn main() {
     let res =
-        reqwest::get("https://nnv4api.dmzj.com/comic/detail/16187?uid=2665531")
+        reqwest::get("https://nnv4api.dmzj.com/comic/chapter/71857/146271")
             .await
             .unwrap();
 
@@ -40,7 +40,7 @@ async fn main() {
 
     let b = decrypt(text, cipher);
 
-    let r = details::ComicDetailResponse::parse_from_bytes(&b).unwrap();
+    let r = comic::ComicChapterResponse::parse_from_bytes(&b).unwrap();
 
-    println!("{:?}", r.Data.Description);
+    println!("{:?}", r.data);
 }

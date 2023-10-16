@@ -1,7 +1,7 @@
 mod protos;
 
-/// Generated from `details.proto`
+/// Generated from `comic.proto`
 /// ```protobuf
-#[doc = include_str!("../protos/details.proto")]
+#[doc = include_str!("../protos/comic.proto")]
 /// ```
-pub use protos::details;
+pub use protos::comic;

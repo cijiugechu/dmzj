@@ -1,3 +1,3 @@
 // @generated
 
-pub mod details;
+pub mod comic;

@@ -12,20 +12,13 @@ async fn main() {
 
     let response = api.fetch_manga_details(first_id).await.unwrap();
 
-    let description = &response.Data.Description;
-    let title = &response.Data.Title;
-    let cover = &response.Data.Cover;
-    let authors = &response.Data.Authors;
-    let chapter_ids: &Vec<i32> = &response
-        .Data
-        .Chapters
-        .iter()
-        .map(|c| c.Data[0].ChapterId)
-        .collect();
+    let description = &response.data.description;
+    let title = &response.data.title;
+    let cover = &response.data.cover;
+    let authors = &response.data.authors;
 
     println!("title = {}", title);
     println!("description = {}", description);
     println!("cover = {}", cover);
     println!("authors = {:?}", authors);
-    println!("chapters = {:?}", chapter_ids);
 }

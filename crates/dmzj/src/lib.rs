@@ -1,4 +1,4 @@
-use dmzj_proto::details::ComicDetailResponse;
+use dmzj_proto::comic::ComicDetailResponse;
 use http_cache_reqwest::{
     Cache, CacheMode, HttpCache, HttpCacheOptions, MokaManager,
 };
