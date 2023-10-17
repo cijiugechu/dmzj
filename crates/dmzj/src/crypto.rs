@@ -1,4 +1,5 @@
 use base64::{engine::general_purpose, Engine};
+use bytes::Bytes;
 use once_cell::sync::OnceCell;
 use rsa::{pkcs8::DecodePrivateKey, Pkcs1v15Encrypt, RsaPrivateKey};
 use snafu::ResultExt;
@@ -20,7 +21,7 @@ fn get_private_key() -> &'static RsaPrivateKey {
     })
 }
 
-fn decrypt(encrypted: String, key: &RsaPrivateKey) -> DmzjResult<Vec<u8>> {
+fn decrypt(encrypted: Bytes, key: &RsaPrivateKey) -> DmzjResult<Vec<u8>> {
     let mut result = vec![];
     let encrypted_data = general_purpose::STANDARD.decode(encrypted).unwrap();
 
@@ -32,8 +33,8 @@ fn decrypt(encrypted: String, key: &RsaPrivateKey) -> DmzjResult<Vec<u8>> {
     Ok(result)
 }
 
-pub fn decrypt_text(text: String) -> DmzjResult<Vec<u8>> {
+pub fn decrypt_bytes(b: Bytes) -> DmzjResult<Vec<u8>> {
     let key = get_private_key();
 
-    decrypt(text, key)
+    decrypt(b, key)
 }

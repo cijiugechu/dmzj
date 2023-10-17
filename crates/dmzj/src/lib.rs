@@ -7,7 +7,7 @@ use reqwest_middleware::{ClientBuilder, ClientWithMiddleware};
 use snafu::ResultExt;
 use std::time::Duration;
 
-use crate::crypto::decrypt_text;
+use crate::crypto::decrypt_bytes;
 use crate::error::{DmzjResult, ParseSnafu, RequestSnafu};
 use crate::model::{LatestUpdatesMangaItem, PopularMangaItem};
 
@@ -127,12 +127,12 @@ impl Api {
             .await
             .context(RequestSnafu { url: url.as_str() })?;
 
-        let text = response
-            .text()
+        let bytes_from_res = response
+            .bytes()
             .await
             .context(ParseSnafu { url: url.as_str() })?;
 
-        let b = decrypt_text(text)?;
+        let b = decrypt_bytes(bytes_from_res)?;
 
         Ok(ComicDetailResponse::parse_from_bytes(&b).unwrap())
     }
