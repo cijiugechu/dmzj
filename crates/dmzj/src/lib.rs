@@ -83,14 +83,11 @@ impl Api {
 
         let response = self
             .http_client
-            .get(&url)
+            .get(url)
             .send()
             .await
-            .context(RequestSnafu { url: url.as_str() })?;
-        response
-            .json()
-            .await
-            .context(ParseSnafu { url: url.as_str() })
+            .context(RequestSnafu)?;
+        response.json().await.context(ParseSnafu)
     }
 
     pub async fn fetch_latest_updates_manga(
@@ -101,14 +98,11 @@ impl Api {
 
         let response = self
             .http_client
-            .get(&url)
+            .get(url)
             .send()
             .await
-            .context(RequestSnafu { url: url.as_str() })?;
-        response
-            .json()
-            .await
-            .context(ParseSnafu { url: url.as_str() })
+            .context(RequestSnafu)?;
+        response.json().await.context(ParseSnafu)
     }
 
     /// ```rust
@@ -122,15 +116,12 @@ impl Api {
 
         let response = self
             .http_client
-            .get(&url)
+            .get(url)
             .send()
             .await
-            .context(RequestSnafu { url: url.as_str() })?;
+            .context(RequestSnafu)?;
 
-        let bytes_from_res = response
-            .bytes()
-            .await
-            .context(ParseSnafu { url: url.as_str() })?;
+        let bytes_from_res = response.bytes().await.context(ParseSnafu)?;
 
         let b = decrypt_bytes(bytes_from_res)?;
 
