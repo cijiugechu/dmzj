@@ -8,7 +8,7 @@ use snafu::ResultExt;
 use std::time::Duration;
 
 use crate::crypto::decrypt_bytes;
-use crate::error::{DmzjResult, ParseSnafu, RequestSnafu};
+use crate::error::{DmzjResult, ParseSnafu, ProtoBufSnafu, RequestSnafu};
 use crate::model::{LatestUpdatesMangaItem, PopularMangaItem};
 
 mod crypto;
@@ -125,7 +125,7 @@ impl Api {
 
         let b = decrypt_bytes(bytes_from_res)?;
 
-        Ok(ComicDetailResponse::parse_from_bytes(&b).unwrap())
+        ComicDetailResponse::parse_from_bytes(&b).context(ProtoBufSnafu)
     }
 }
 

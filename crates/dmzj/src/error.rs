@@ -11,4 +11,6 @@ pub enum DmzjError {
     Parse { source: reqwest::Error },
     #[snafu(display("Failed to decrypt response: {}", source))]
     Decrypt { source: rsa::Error },
+    #[snafu(display("Failed to parse protobuf: {}", source))]
+    ProtoBuf { source: protobuf::Error },
 }
