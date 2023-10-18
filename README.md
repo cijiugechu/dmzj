@@ -1,5 +1,7 @@
 # `dmzj`
 
+[![Cargo](https://img.shields.io/crates/v/dmzj.svg)](https://crates.io/crates/dmzj) [![Documentation](https://docs.rs/dmzj/badge.svg)](https://docs.rs/dmzj)
+
 An async dmzj client for Rust.
 
 Mostly taken from [tachiyomi extensions](https://github.com/tachiyomiorg/tachiyomi-extensions/tree/master/src/zh/dmzj) & [flutter_dmzj](https://github.com/xiaoyaocz/flutter_dmzj).
