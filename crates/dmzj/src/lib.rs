@@ -1,3 +1,5 @@
+#![doc = include_str!("../../../README.md")]
+
 use dmzj_proto::comic::{ComicChapterResponse, ComicDetailResponse};
 use http_cache_reqwest::{
     Cache, CacheMode, HttpCache, HttpCacheOptions, MokaManager,
