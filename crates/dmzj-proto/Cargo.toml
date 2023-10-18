@@ -14,12 +14,12 @@ categories.workspace   = true
 [dependencies]
 bytes = { workspace = true }
 protobuf = { workspace = true }
-rsa = { workspace = true }
-base64 ={ workspace = true }
 
 [dev-dependencies]
 reqwest = { workspace = true }
 tokio = { workspace = true }
+rsa = { workspace = true }
+base64 = { workspace = true }
 
 [build-dependencies]
 protobuf-codegen = { workspace = true }
