@@ -4,7 +4,7 @@ use dmzj::Api;
 async fn main() {
     let api = Api::new();
 
-    let popular_manga = api.fetch_latest_updates_manga(1).await.unwrap();
+    let popular_manga = api.fetch_latest_updates_manga(0).await.unwrap();
     let first = &popular_manga[0];
     let first_id = first.id;
 

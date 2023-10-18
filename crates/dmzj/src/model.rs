@@ -90,3 +90,78 @@ where
 {
     serializer.serialize_str(itoa::Buffer::new().format(*value))
 }
+
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub struct CategoryResponse {
+    pub code: u16,
+    pub msg: String,
+    pub data: Vec<CategoryItem>,
+}
+
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub struct CategoryItem {
+    pub tag_id: u32,
+    pub title: String,
+    pub cover: String,
+}
+
+impl PartialEq for CategoryItem {
+    fn eq(&self, other: &Self) -> bool {
+        self.tag_id == other.tag_id
+    }
+}
+
+impl Hash for CategoryItem {
+    fn hash<H: std::hash::Hasher>(&self, state: &mut H) {
+        self.tag_id.hash(state);
+    }
+}
+
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub struct AuthorDetailsResponse {
+    pub nickname: String,
+    pub data: Vec<MangaByAuthor>,
+}
+
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub struct MangaByAuthor {
+    pub id: u32,
+    pub name: String,
+    pub cover: String,
+    pub status: String,
+}
+
+impl PartialEq for MangaByAuthor {
+    fn eq(&self, other: &Self) -> bool {
+        self.id == other.id && self.status == other.status
+    }
+}
+
+impl Hash for MangaByAuthor {
+    fn hash<H: std::hash::Hasher>(&self, state: &mut H) {
+        self.id.hash(state);
+        self.status.hash(state);
+    }
+}
+
+pub type MangaSearchResponse = Vec<SearchedMangaItem>;
+
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub struct SearchedMangaItem {
+    pub id: u32,
+    pub addtime: i64,
+    pub alias_name: String,
+    pub authors: String,
+    pub copyright: i32,
+    pub cover: String,
+    pub device_show: i32,
+    pub grade: i32,
+    pub hidden: i32,
+    pub hot_hits: u32,
+    pub is_safe: i32,
+    pub last_name: String,
+    pub quality: i32,
+    pub status: i32,
+    pub title: String,
+    pub types: String,
+}
