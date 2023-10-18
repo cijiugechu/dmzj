@@ -13,7 +13,7 @@ repository   = "https://github.com/cijiugechu/dmzj"
 homepage     = "https://github.com/cijiugechu/dmzj"
 
 [workspace.dependencies]
-dmzj-proto = { path = "crates/dmzj-proto" }
+dmzj-proto = { path = "crates/dmzj-proto", version = "0.1.0" }
 
 reqwest = { version = "0.11.20", features = ["json", "cookies", "gzip", "brotli", "deflate"] }
 serde = { version = "1.0.188", features = ["derive"] }
