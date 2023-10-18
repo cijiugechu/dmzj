@@ -15,6 +15,7 @@ use crate::model::{
 };
 
 mod crypto;
+/// Dmzj errors
 pub mod error;
 pub mod model;
 
