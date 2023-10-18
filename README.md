@@ -34,3 +34,5 @@ async fn main() {
     println!("authors = {:?}", authors);
 }
 ```
+
+For more examples, please check out [examples](/crates/dmzj/examples/).
