@@ -54,6 +54,11 @@ impl Api {
         Self { http_client }
     }
 
+    /// Construct a Client instance from a provided `reqwest_middleware` HTTP client
+    pub fn from_http_client(http_client: ClientWithMiddleware) -> Self {
+        Self { http_client }
+    }
+
     fn popular_manga_url(page: u16) -> String {
         format!("{}/classify/0/0/{}.json", Self::V3_URL, page)
     }
