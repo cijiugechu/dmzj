@@ -405,7 +405,7 @@ dependencies = [
 
 [[package]]
 name = "dmzj"
-version = "0.1.3"
+version = "0.1.4"
 dependencies = [
  "base64",
  "bytes",
@@ -425,7 +425,7 @@ dependencies = [
 
 [[package]]
 name = "dmzj-proto"
-version = "0.1.3"
+version = "0.1.4"
 dependencies = [
  "base64",
  "bytes",
