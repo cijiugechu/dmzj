@@ -16,7 +16,6 @@ reqwest            = { workspace = true }
 serde              = { workspace = true }
 itoa               = { workspace = true }
 bytes              = { workspace = true }
-base64             = { workspace = true }
 protobuf           = { workspace = true }
 rsa                = { workspace = true }
 snafu              = { workspace = true }
@@ -28,6 +27,7 @@ base64-simd        = { workspace = true }
 dmzj-proto = { workspace = true }
 
 [dev-dependencies]
+base64     = { workspace = true }
 tokio      = { workspace = true }
 serde_json = { workspace = true }
 criterion  = { workspace = true }

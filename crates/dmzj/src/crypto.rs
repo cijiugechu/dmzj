@@ -1,4 +1,4 @@
-use base64::{engine::general_purpose, Engine};
+use base64_simd::STANDARD;
 use bytes::Bytes;
 use once_cell::sync::OnceCell;
 use rsa::{pkcs8::DecodePrivateKey, Pkcs1v15Encrypt, RsaPrivateKey};
@@ -14,9 +14,7 @@ fn get_private_key() -> &'static RsaPrivateKey {
     static RSA_PRIVATE_KEY: OnceCell<RsaPrivateKey> = OnceCell::new();
 
     RSA_PRIVATE_KEY.get_or_init(|| {
-        let key_bytes = general_purpose::STANDARD
-            .decode(PRIVATE_KEY_BASE64)
-            .unwrap();
+        let key_bytes = STANDARD.decode_to_vec(PRIVATE_KEY_BASE64).unwrap();
 
         RsaPrivateKey::from_pkcs8_der(&key_bytes).unwrap()
     })
@@ -24,7 +22,7 @@ fn get_private_key() -> &'static RsaPrivateKey {
 
 fn decrypt(encrypted: Bytes, key: &RsaPrivateKey) -> DmzjResult<Vec<u8>> {
     let mut result = Vec::with_capacity(1024);
-    let encrypted_data = general_purpose::STANDARD.decode(encrypted).unwrap();
+    let encrypted_data = STANDARD.decode_to_vec(encrypted).unwrap();
 
     for chunk in encrypted_data.chunks(MAX_DECRYPT_BLOCK) {
         let dec = key.decrypt(Pkcs1v15Encrypt, chunk).context(DecryptSnafu)?;
