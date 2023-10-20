@@ -23,9 +23,15 @@ snafu              = { workspace = true }
 http-cache-reqwest = { workspace = true }
 reqwest-middleware = { workspace = true }
 once_cell          = { workspace = true }
+base64-simd        = { workspace = true }
 
 dmzj-proto = { workspace = true }
 
 [dev-dependencies]
 tokio      = { workspace = true }
 serde_json = { workspace = true }
+criterion  = { workspace = true }
+
+[[bench]]
+name    = "base64"
+harness = false
