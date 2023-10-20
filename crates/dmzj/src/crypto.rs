@@ -23,7 +23,7 @@ fn get_private_key() -> &'static RsaPrivateKey {
 }
 
 fn decrypt(encrypted: Bytes, key: &RsaPrivateKey) -> DmzjResult<Vec<u8>> {
-    let mut result = vec![];
+    let mut result = Vec::with_capacity(1024);
     let encrypted_data = general_purpose::STANDARD.decode(encrypted).unwrap();
 
     for chunk in encrypted_data.chunks(MAX_DECRYPT_BLOCK) {
