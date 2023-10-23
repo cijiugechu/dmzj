@@ -161,7 +161,6 @@ pub struct SearchedMangaItem {
     pub is_safe: i32,
     pub last_name: String,
     pub quality: i32,
-    pub status: i32,
     pub title: String,
     pub types: String,
 }
