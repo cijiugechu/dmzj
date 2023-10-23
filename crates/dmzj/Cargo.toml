@@ -1,6 +1,6 @@
 [package]
 name                  = "dmzj"
-version               = "0.1.6"
+version               = "0.1.7"
 documentation         = "https://docs.rs/dmzj"
 authors.workspace     = true
 description.workspace = true
