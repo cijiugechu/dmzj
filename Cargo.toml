@@ -29,6 +29,5 @@ base64             = { version = "0.21" }
 snafu              = { version = "0.7" }
 http-cache-reqwest = { version = "0.12", features = ["manager-moka"] }
 reqwest-middleware = { version = "0.2" }
-once_cell          = { version = "1.18" }
 base64-simd        = { version = "0.8" }
 criterion          = { version = "0.5" }

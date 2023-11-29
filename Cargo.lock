@@ -541,7 +541,6 @@ dependencies = [
  "dmzj-proto",
  "http-cache-reqwest",
  "itoa",
- "once_cell",
  "protobuf",
  "reqwest",
  "reqwest-middleware",

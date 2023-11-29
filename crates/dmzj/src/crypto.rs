@@ -1,8 +1,9 @@
 use base64_simd::STANDARD;
 use bytes::Bytes;
-use once_cell::sync::OnceCell;
 use rsa::{pkcs8::DecodePrivateKey, Pkcs1v15Encrypt, RsaPrivateKey};
 use snafu::ResultExt;
+
+use std::sync::OnceLock;
 
 use crate::error::{DecryptSnafu, DmzjResult};
 
@@ -11,7 +12,7 @@ const PRIVATE_KEY_BASE64: &str = "MIICeAIBADANBgkqhkiG9w0BAQEFAASCAmIwggJeAgEAAo
 const MAX_DECRYPT_BLOCK: usize = 128;
 
 fn get_private_key() -> &'static RsaPrivateKey {
-    static RSA_PRIVATE_KEY: OnceCell<RsaPrivateKey> = OnceCell::new();
+    static RSA_PRIVATE_KEY: OnceLock<RsaPrivateKey> = OnceLock::new();
 
     RSA_PRIVATE_KEY.get_or_init(|| {
         let key_bytes = STANDARD.decode_to_vec(PRIVATE_KEY_BASE64).unwrap();
