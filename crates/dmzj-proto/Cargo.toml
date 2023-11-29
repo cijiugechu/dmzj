@@ -1,15 +1,16 @@
 [package]
-name                  = "dmzj-proto"
-version               = "0.1.4"
-documentation         = "https://docs.rs/dmzj-proto"
-authors.workspace     = true
-description.workspace = true
-edition.workspace     = true
-homepage.workspace    = true
-keywords.workspace    = true
-license.workspace     = true
-repository.workspace  = true
-categories.workspace  = true
+name                   = "dmzj-proto"
+version                = "0.1.4"
+documentation          = "https://docs.rs/dmzj-proto"
+authors.workspace      = true
+description.workspace  = true
+edition.workspace      = true
+rust-version.workspace = true
+homepage.workspace     = true
+keywords.workspace     = true
+license.workspace      = true
+repository.workspace   = true
+categories.workspace   = true
 
 [dependencies]
 bytes    = { workspace = true }

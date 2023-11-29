@@ -3,14 +3,15 @@ resolver = "2"
 members  = ["crates/*"]
 
 [workspace.package]
-authors     = ["cijiugechu <cijiugechu@gmail.com>"]
-categories  = ["api-bindings", "network-programming", "web-programming"]
-description = "dmzj api bindings"
-edition     = "2021"
-keywords    = ["dmzj", "api", "protobuf"]
-license     = "Apache-2.0"
-repository  = "https://github.com/cijiugechu/dmzj"
-homepage    = "https://github.com/cijiugechu/dmzj"
+authors      = ["cijiugechu <cijiugechu@gmail.com>"]
+categories   = ["api-bindings", "network-programming", "web-programming"]
+description  = "dmzj api bindings"
+edition      = "2021"
+rust-version = "1.70"
+keywords     = ["dmzj", "api", "protobuf"]
+license      = "Apache-2.0"
+repository   = "https://github.com/cijiugechu/dmzj"
+homepage     = "https://github.com/cijiugechu/dmzj"
 
 [workspace.dependencies]
 dmzj-proto = { path = "crates/dmzj-proto", version = "0.1.4" }
