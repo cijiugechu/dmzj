@@ -24,7 +24,7 @@ itoa               = { version = "1.0" }
 bytes              = { version = "1.5" }
 protobuf           = { version = "3.3" }
 protobuf-codegen   = { version = "3.3" }
-rsa                = { version = "0.9" }
+rsa                = { version = "0.9.6" }
 base64             = { version = "0.21" }
 const-decoder      = { version = "0.3" }
 snafu              = { version = "0.7" }
