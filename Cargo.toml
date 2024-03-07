@@ -25,10 +25,10 @@ bytes              = { version = "1.5" }
 protobuf           = { version = "3.3" }
 protobuf-codegen   = { version = "3.3" }
 rsa                = { version = "0.9.6" }
-base64             = { version = "0.21" }
+base64             = { version = "0.22" }
 const-decoder      = { version = "0.3" }
-snafu              = { version = "0.7" }
-http-cache-reqwest = { version = "0.12", features = ["manager-moka"] }
+snafu              = { version = "0.8" }
+http-cache-reqwest = { version = "0.13", features = ["manager-moka"] }
 reqwest-middleware = { version = "0.2" }
 base64-simd        = { version = "0.8" }
 criterion          = { version = "0.5" }
