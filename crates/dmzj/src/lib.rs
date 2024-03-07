@@ -8,6 +8,7 @@ use protobuf::Message;
 use reqwest_middleware::{ClientBuilder, ClientWithMiddleware};
 use snafu::ResultExt;
 use std::time::Duration;
+use tracing::{event, Level};
 
 use crate::crypto::decrypt_bytes;
 use crate::error::{DmzjResult, ParseSnafu, ProtoBufSnafu, RequestSnafu};
@@ -105,11 +106,14 @@ impl Api {
         )
     }
 
+    #[tracing::instrument(skip(self))]
     pub async fn fetch_popular_manga(
         &self,
         page: u16,
     ) -> DmzjResult<Vec<PopularMangaItem>> {
         let url = Self::popular_manga_url(page);
+
+        event!(Level::DEBUG, url = url.as_str());
 
         let response = self
             .http_client
@@ -120,11 +124,14 @@ impl Api {
         response.json().await.context(ParseSnafu)
     }
 
+    #[tracing::instrument(skip(self))]
     pub async fn fetch_latest_updates_manga(
         &self,
         page: u16,
     ) -> DmzjResult<Vec<LatestUpdatesMangaItem>> {
         let url = Self::latest_updates_url(page);
+
+        event!(Level::DEBUG, url = url.as_str());
 
         let response = self
             .http_client
@@ -138,11 +145,14 @@ impl Api {
     /// ```rust
     #[doc = include_str!("../examples/parse.rs")]
     /// ```
+    #[tracing::instrument(skip(self))]
     pub async fn fetch_manga_details(
         &self,
         id: u32,
     ) -> DmzjResult<ComicDetailResponse> {
         let url = Self::manga_info_url(id);
+
+        event!(Level::DEBUG, url = url.as_str());
 
         let response = self
             .http_client
@@ -161,12 +171,15 @@ impl Api {
     /// ```rust
     #[doc = include_str!("../examples/chapter_images.rs")]
     /// ```
+    #[tracing::instrument(skip(self))]
     pub async fn fetch_chapter_images(
         &self,
         manga_id: u32,
         chapter_id: i32,
     ) -> DmzjResult<ComicChapterResponse> {
         let url = Self::chapter_images_url(manga_id, chapter_id);
+
+        event!(Level::DEBUG, url = url.as_str());
 
         let response = self
             .http_client
@@ -185,8 +198,11 @@ impl Api {
     /// ```rust
     #[doc = include_str!("../examples/category.rs")]
     /// ```
+    #[tracing::instrument(skip(self))]
     pub async fn fetch_category(&self) -> DmzjResult<CategoryResponse> {
         let url = Self::category_url();
+
+        event!(Level::DEBUG, url = url.as_str());
 
         let response = self
             .http_client
@@ -201,11 +217,14 @@ impl Api {
     /// ```rust
     #[doc = include_str!("../examples/author_details.rs")]
     /// ```
+    #[tracing::instrument(skip(self))]
     pub async fn fetch_author_details(
         &self,
         author_tag_id: i64,
     ) -> DmzjResult<AuthorDetailsResponse> {
         let url = Self::author_details_url(author_tag_id);
+
+        event!(Level::DEBUG, url = url.as_str());
 
         let response = self
             .http_client
@@ -220,12 +239,15 @@ impl Api {
     /// ```rust
     #[doc = include_str!("../examples/search.rs")]
     /// ```
-    pub async fn search_manga<T: AsRef<str>>(
+    #[tracing::instrument(skip(self))]
+    pub async fn search_manga<T: AsRef<str> + std::fmt::Debug>(
         &self,
         keyword: T,
         page: u16,
     ) -> DmzjResult<MangaSearchResponse> {
         let url = Self::search_url(keyword, page);
+
+        event!(Level::DEBUG, url = url.as_str());
 
         let response = self
             .http_client
