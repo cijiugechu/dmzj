@@ -16,7 +16,7 @@ homepage     = "https://github.com/cijiugechu/dmzj"
 [workspace.dependencies]
 dmzj-proto = { path = "crates/dmzj-proto", version = "0.1.4" }
 
-reqwest            = { version = "0.11", features = ["json", "cookies", "gzip", "brotli", "deflate"] }
+reqwest            = { version = "0.12", features = ["json", "cookies", "gzip", "brotli", "deflate"] }
 serde              = { version = "1.0", features = ["derive"] }
 serde_json         = { version = "1.0" }
 tokio              = { version = "1", features = ["full"] }
@@ -30,7 +30,7 @@ rsa                = { version = "0.9.6" }
 base64             = { version = "0.22" }
 const-decoder      = { version = "0.3" }
 snafu              = { version = "0.8" }
-http-cache-reqwest = { version = "0.13", features = ["manager-moka"] }
-reqwest-middleware = { version = "0.2" }
+http-cache-reqwest = { version = "0.14", features = ["manager-moka"] }
+reqwest-middleware = { version = "0.3" }
 base64-simd        = { version = "0.8" }
 criterion          = { version = "0.5" }
